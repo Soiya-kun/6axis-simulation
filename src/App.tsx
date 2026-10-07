@@ -6,7 +6,6 @@ import {
   Box,
   Check,
   CheckCircle2,
-  ChevronDown,
   CircleHelp,
   Clock3,
   Code2,
@@ -32,6 +31,7 @@ import {
   Repeat2,
 } from 'lucide-react';
 import { Scene } from './Scene';
+import { StudioNav } from './StudioNav';
 import { cloneConfig, validateConfig } from './core/config';
 import { containment, forwardKinematics } from './core/kinematics';
 import { DEG, norm, rotationError, sub } from './core/math';
@@ -333,9 +333,7 @@ export function App() {
           </b>
         </a>
         <div className="top-divider" />
-        <span className="project-name">
-          6-axis simulation <ChevronDown size={13} />
-        </span>
+        <StudioNav active="robot" />
         <span className="local-badge">
           <i />
           LOCAL WORKSPACE

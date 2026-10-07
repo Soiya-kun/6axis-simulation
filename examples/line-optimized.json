@@ -1,0 +1,27 @@
+{
+  "kind": "manufacturing-line",
+  "version": 1,
+  "lineId": "inspection-01",
+  "name": "タクトを短縮",
+  "batchSize": 12,
+  "timeLimit": 240,
+  "feedInterval": 7,
+  "conveyorSpeed": 450,
+  "acceleration": 1600,
+  "outputSpeed": 500,
+  "plcScan": 0.02,
+  "sensorDelay": 0.04,
+  "stopWait": 0.52,
+  "inspectionTime": 1.2,
+  "releaseWait": 0,
+  "robotTimeout": 6,
+  "jamTimeout": 12,
+  "requireRobotHome": true,
+  "doneMode": "latched",
+  "donePulse": 0.1,
+  "faults": {
+    "positionSensor": "normal",
+    "dropDone": false,
+    "outputBlocked": false
+  }
+}

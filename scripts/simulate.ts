@@ -2,6 +2,8 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cloneConfig, validateConfig } from '../src/core/config';
 import { simulate, toCSV } from '../src/core/simulation';
+import { validateLineConfig } from '../src/core/line/config';
+import { simulateLine, lineEventsCSV } from '../src/core/line/engine';
 const args = process.argv.slice(2);
 try {
   const options: Record<string, string> = {},
@@ -23,20 +25,33 @@ try {
     out = resolve(options['--out'] ?? positional[1] ?? 'output/default');
   const parsed = path ? JSON.parse(await readFile(resolve(path), 'utf8')) : cloneConfig(),
     config = parsed.config ?? parsed;
-  validateConfig(config);
-  const result = simulate(config);
+  const isLine = config.kind === 'manufacturing-line';
+  let result;
+  let csvName: string;
+  let csv: string;
+  if (isLine) {
+    validateLineConfig(config);
+    result = simulateLine(config);
+    csvName = 'events.csv';
+    csv = lineEventsCSV(result);
+  } else {
+    validateConfig(config);
+    result = simulate(config);
+    csvName = 'trajectory.csv';
+    csv = toCSV(result);
+  }
   await mkdir(out, { recursive: true });
   await Promise.all([
     writeFile(resolve(out, 'config.json'), JSON.stringify(config, null, 2)),
     writeFile(resolve(out, 'result.json'), JSON.stringify(result, null, 2)),
-    writeFile(resolve(out, 'trajectory.csv'), toCSV(result)),
+    writeFile(resolve(out, csvName), csv),
   ]);
   console.log(
     JSON.stringify(
       {
         status: result.status,
         ...result.summary,
-        elapsedMs: Math.round(result.elapsedMs),
+        ...('elapsedMs' in result ? { elapsedMs: Math.round(result.elapsedMs) } : {}),
         output: out,
       },
       null,

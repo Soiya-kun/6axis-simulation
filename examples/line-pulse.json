@@ -1,0 +1,27 @@
+{
+  "kind": "manufacturing-line",
+  "version": 1,
+  "lineId": "inspection-01",
+  "name": "信号を見逃す",
+  "batchSize": 12,
+  "timeLimit": 240,
+  "feedInterval": 10,
+  "conveyorSpeed": 300,
+  "acceleration": 600,
+  "outputSpeed": 400,
+  "plcScan": 0.2,
+  "sensorDelay": 0.04,
+  "stopWait": 0.85,
+  "inspectionTime": 1.6,
+  "releaseWait": 0.8,
+  "robotTimeout": 6,
+  "jamTimeout": 12,
+  "requireRobotHome": true,
+  "doneMode": "pulse",
+  "donePulse": 0.01,
+  "faults": {
+    "positionSensor": "normal",
+    "dropDone": false,
+    "outputBlocked": false
+  }
+}

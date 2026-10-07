@@ -1,0 +1,27 @@
+{
+  "kind": "manufacturing-line",
+  "version": 1,
+  "lineId": "inspection-01",
+  "name": "供給過多",
+  "batchSize": 12,
+  "timeLimit": 240,
+  "feedInterval": 3,
+  "conveyorSpeed": 300,
+  "acceleration": 600,
+  "outputSpeed": 400,
+  "plcScan": 0.02,
+  "sensorDelay": 0.04,
+  "stopWait": 0.85,
+  "inspectionTime": 1.6,
+  "releaseWait": 0.8,
+  "robotTimeout": 6,
+  "jamTimeout": 12,
+  "requireRobotHome": true,
+  "doneMode": "latched",
+  "donePulse": 0.1,
+  "faults": {
+    "positionSensor": "normal",
+    "dropDone": false,
+    "outputBlocked": false
+  }
+}
